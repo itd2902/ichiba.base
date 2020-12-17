@@ -1,0 +1,36 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DebugType>full</DebugType>
+    <DebugSymbols>true</DebugSymbols>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="EasyCaching.Bus.Redis" Version="0.9.0" />
+    <PackageReference Include="EasyCaching.HybridCache" Version="0.9.0" />
+    <PackageReference Include="EasyCaching.InMemory" Version="0.9.0" />
+    <PackageReference Include="EasyCaching.Redis" Version="0.9.0" />
+    <PackageReference Include="EasyCaching.Serialization.Json" Version="0.9.0" />
+    <PackageReference Include="FluentValidation.AspNetCore" Version="9.2.0" />
+    <PackageReference Include="IdentityModel" Version="4.5.0" />
+    <PackageReference Include="linq2db.AspNet" Version="3.1.5" />
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.NewtonsoftJson" Version="3.1.9" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\IChiba.Libraries\IChiba.Caching\IChiba.Caching.Manager\IChiba.Caching.Manager.csproj" />
+    <ProjectReference Include="..\..\IChiba.Libraries\IChiba.Core\IChiba.Core.csproj" />
+    <ProjectReference Include="..\..\IChiba.Libraries\IChiba.Data\IChiba.Data.csproj" />
+    <ProjectReference Include="..\..\IChiba.Libraries\IChiba.Services\IChiba.Services.csproj" />
+  </ItemGroup>
+
+  <Target Name="PostBuild" AfterTargets="PostBuildEvent">
+    <Exec Command="xcopy &quot;$(TargetDir)*.dll&quot; &quot;$(SolutionDir)..\IChiba.SharedRefs\Assemblies\IChiba&quot; /c /e /y" />
+  </Target>
+
+</Project>

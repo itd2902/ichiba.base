@@ -1,0 +1,24 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DebugType>full</DebugType>
+    <DebugSymbols>true</DebugSymbols>
+  </PropertyGroup>
+
+  <Target Name="PostBuild" AfterTargets="PostBuildEvent">
+    <Exec Command="xcopy &quot;$(TargetDir)*.dll&quot; &quot;$(SolutionDir)..\IChiba.SharedRefs\Assemblies\IChiba&quot; /c /e /y" />
+  </Target>
+
+  <ItemGroup>
+    <ProjectReference Include="..\IChiba.Caching\IChiba.Caching.Helpers\IChiba.Caching.Helpers.csproj" />
+    <ProjectReference Include="..\IChiba.Caching\IChiba.Caching.Manager\IChiba.Caching.Manager.csproj" />
+    <ProjectReference Include="..\IChiba.Core\IChiba.Core.csproj" />
+    <ProjectReference Include="..\IChiba.Data\IChiba.Data.csproj" />
+  </ItemGroup>
+
+</Project>
